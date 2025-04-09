@@ -1,0 +1,85 @@
+// Interface for fuel-powered vehicles
+interface FuelPowered {
+    void refuel();
+}
+
+// Abstract base class
+abstract class Vehicle {
+    String brand;
+    int year;
+
+    public Vehicle(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+
+    abstract void start();
+    abstract void stop();
+
+    void displayInfo() {
+        System.out.println("Brand: " + brand + ", Year: " + year);
+    }
+}
+
+// Car extends Vehicle and implements FuelPowered
+class Car extends Vehicle implements FuelPowered {
+    public Car(String brand, int year) {
+        super(brand, year);
+    }
+
+    @Override
+    void start() {
+        System.out.println(brand + " car is starting with engine.");
+    }
+
+    @Override
+    void stop() {
+        System.out.println(brand + " car is stopping.");
+    }
+
+    @Override
+    public void refuel() {
+        System.out.println(brand + " car is refueling with gasoline.");
+    }
+}
+
+// ElectricCar extends Vehicle but does NOT implement FuelPowered
+class ElectricCar extends Vehicle {
+    public ElectricCar(String brand, int year) {
+        super(brand, year);
+    }
+
+    @Override
+    void start() {
+        System.out.println(brand + " electric car is starting silently.");
+    }
+
+    @Override
+    void stop() {
+        System.out.println(brand + " electric car is stopping.");
+    }
+
+    void charge() {
+        System.out.println(brand + " electric car is charging.");
+    }
+}
+
+// Main class to test
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car("Toyota", 2020);
+        ElectricCar electricCar = new ElectricCar("Tesla", 2022);
+
+        car.displayInfo();
+        car.start();
+        car.refuel();
+        car.stop();
+
+        System.out.println();
+
+        electricCar.displayInfo();
+        electricCar.start();
+        electricCar.charge();
+        electricCar.stop();
+    }
+}
